@@ -1,0 +1,247 @@
+# A. group_key_enrollment_results
+% Read CSV
+data = readtable('group_key_enrollment_results.csv');
+
+% Automatically use first two columns (safe)
+x = data{:,1};   % e.g., number of members
+y = data{:,2};   % e.g., avg enrollment time
+
+% Create figure
+figure('Color', 'w', 'Position', [100 100 700 450]);
+
+plot(x, y, '-s', ...
+    'LineWidth', 2, ...
+    'MarkerSize', 7, ...
+    'MarkerFaceColor', [0.3 0.3 0.3]);
+
+grid on;
+box on;
+
+% Axis styling
+ax = gca;
+ax.FontSize = 12;
+ax.LineWidth = 1.2;
+
+xlabel('Number of Enrolled Doctors', 'FontSize', 13);
+ylabel('Average Enrollment Time (ms)', 'FontSize', 13);
+
+
+% Axis limits
+xlim([min(x)-1, max(x)+1]);
+ylim([min(y)*0.95, max(y)*1.05]);
+
+% Annotate points
+offset = 0.02 * (max(y) - min(y));
+for i = 1:length(x)
+    text(x(i), y(i) + offset, sprintf('%.2f', y(i)), ...
+        'HorizontalAlignment', 'center', ...
+        'FontSize', 10);
+end
+
+% Tight layout
+set(gca, 'LooseInset', get(gca, 'TightInset'));
+
+% Export
+exportgraphics(gcf, 'group_enrollment_plot.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'group_enrollment_plot.png', 'Resolution', 300);
+
+
+
+
+# B. prescription_issuance_results
+
+
+% Read CSV
+data = readtable('prescription_issuance_results.csv');
+
+x = data.total_attributes;
+y = data.avg_combined_issuance_total_ms;
+
+% Create figure
+figure('Color', 'w', 'Position', [100 100 700 450]);
+
+plot(x, y, '-o', ...
+    'LineWidth', 2, ...
+    'MarkerSize', 7, ...
+    'MarkerFaceColor', [0.2 0.2 0.2]);
+
+grid on;
+box on;
+
+% Axis styling
+ax = gca;
+ax.FontSize = 12;
+ax.LineWidth = 1.2;
+
+xlabel('Total Number of Attributes', 'FontSize', 13);
+ylabel('Average Issuance Time (ms)', 'FontSize', 13);
+
+
+% Margins
+xlim([min(x)-0.5, max(x)+0.5]);
+ylim([min(y)*0.95, max(y)*1.05]);
+
+% Annotate points
+offset = 0.02 * (max(y) - min(y));
+for i = 1:length(x)
+    text(x(i), y(i) + offset, sprintf('%.2f', y(i)), ...
+        'HorizontalAlignment', 'center', ...
+        'FontSize', 10);
+end
+
+% Tight layout
+set(gca, 'LooseInset', get(gca, 'TightInset'));
+
+% --- Export ---
+% Vector PDF (for paper submission)
+exportgraphics(gcf, 'prescription_issuance_plot.pdf', ...
+    'ContentType', 'vector', ...
+    'BackgroundColor', 'white');
+
+% High-resolution PNG (for slides / quick sharing)
+exportgraphics(gcf, 'prescription_issuance_plot.png', ...
+    'Resolution', 300, ...
+    'BackgroundColor', 'white');
+
+
+# C. prescription_pok_generation_results
+
+% Read CSV
+data = readtable('prescription_pok_generation_results.csv');
+
+% Automatically use columns (consistent with your format)
+x = data{:,2};   % hidden_count
+y = data{:,3};   % avg_proof_generation_ms
+
+% Create figure
+figure('Color', 'w', 'Position', [100 100 700 450]);
+
+plot(x, y, '-o', ...
+    'LineWidth', 2, ...
+    'MarkerSize', 7, ...
+    'MarkerFaceColor', [0.3 0.3 0.3]);
+
+grid on;
+box on;
+
+% Axis styling
+ax = gca;
+ax.FontSize = 12;
+ax.LineWidth = 1.2;
+
+xlabel('Number of Hidden Attributes', 'FontSize', 13);
+ylabel('Average Proof Generation Time (ms)', 'FontSize', 13);
+
+% Axis limits
+xlim([min(x)-1, max(x)+1]);
+ylim([min(y)*0.95, max(y)*1.05]);
+
+% Annotate points
+offset = 0.02 * (max(y) - min(y));
+for i = 1:length(x)
+    text(x(i), y(i) + offset, sprintf('%.2f', y(i)), ...
+        'HorizontalAlignment', 'center', ...
+        'FontSize', 10);
+end
+
+% Tight layout
+set(gca, 'LooseInset', get(gca, 'TightInset'));
+
+% Export
+exportgraphics(gcf, 'proof_generation_plot.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'proof_generation_plot.png', 'Resolution', 300);
+
+# D. prescription_pok_verification_results
+
+% Read CSV
+data = readtable('prescription_pok_verification_results.csv');
+
+% Automatically use columns (consistent with your format)
+x = data{:,2};   % hidden_count
+y = data{:,3};   % avg_combined_verification_ms
+
+% Create figure
+figure('Color', 'w', 'Position', [100 100 700 450]);
+
+plot(x, y, '-d', ...
+    'LineWidth', 2, ...
+    'MarkerSize', 7, ...
+    'MarkerFaceColor', [0.3 0.3 0.3]);
+
+grid on;
+box on;
+
+% Axis styling
+ax = gca;
+ax.FontSize = 12;
+ax.LineWidth = 1.2;
+
+xlabel('Number of Hidden Attributes', 'FontSize', 13);
+ylabel('Average Verification Time (ms)', 'FontSize', 13);
+
+% Axis limits
+xlim([min(x)-1, max(x)+1]);
+ylim([min(y)*0.95, max(y)*1.05]);
+
+% Annotate points
+offset = 0.02 * (max(y) - min(y));
+for i = 1:length(x)
+    text(x(i), y(i) + offset, sprintf('%.2f', y(i)), ...
+        'HorizontalAlignment', 'center', ...
+        'FontSize', 10);
+end
+
+% Tight layout
+set(gca, 'LooseInset', get(gca, 'TightInset'));
+
+% Export
+exportgraphics(gcf, 'proof_verification_plot.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'proof_verification_plot.png', 'Resolution', 300);
+
+
+# E. accountability_cost_results
+
+% Read CSV
+data = readtable('accountability_cost_results.csv');
+
+% Automatically use first two columns (safe)
+x = data{:,1};   % number of enrolled doctors
+y = data{:,2};   % accountability (opening) time
+
+% Create figure
+figure('Color', 'w', 'Position', [100 100 700 450]);
+
+plot(x, y, '-^', ...
+    'LineWidth', 2, ...
+    'MarkerSize', 7, ...
+    'MarkerFaceColor', [0.3 0.3 0.3]);
+
+grid on;
+box on;
+
+% Axis styling
+ax = gca;
+ax.FontSize = 12;
+ax.LineWidth = 1.2;
+
+xlabel('Number of Enrolled Doctors', 'FontSize', 13);
+ylabel('Accountability (Opening) Time (ms)', 'FontSize', 13);
+
+% Axis limits (important for honest visualization)
+xlim([min(x)-1, max(x)+1]);
+ylim([0 2]);   % keeps constant-time behavior clear
+
+% Annotate points
+offset = 0.02 * (max(y) - min(y));
+for i = 1:length(x)
+    text(x(i), y(i) + offset, sprintf('%.2f', y(i)), ...
+        'HorizontalAlignment', 'center', ...
+        'FontSize', 10);
+end
+
+% Tight layout
+set(gca, 'LooseInset', get(gca, 'TightInset'));
+
+% Export
+exportgraphics(gcf, 'accountability_cost_plot.pdf', 'ContentType', 'vector');
+exportgraphics(gcf, 'accountability_cost_plot.png', 'Resolution', 300);
