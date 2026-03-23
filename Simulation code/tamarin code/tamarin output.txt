@@ -1,0 +1,170 @@
+(base) root@instance-template-20250103-20250103-105302:/home/nmuslim162022# tamarin-prover --prove /home/nmuslim162022/prescription_privacy.spthy
+maude tool: 'maude'
+ checking version: WARNING:
+
+ 'maude --version' returned unsupported version '2.7'
+ Please install one of the following versions of Maude: 2.7.1, 3.0, 3.1, 3.2.1, 3.2.2, 3.3, 3.3.1, 3.4, 3.5
+
+Detailed results from testing 'maude'
+ command: maude --version
+ stdin:   
+ stdout:  2.7
+
+ stderr:  
+ checking installation: OK.
+[Theory Prescription_Privacy] Theory loaded
+[Theory Prescription_Privacy] Theory translated
+[Theory Prescription_Privacy] Derivation checks started
+[Theory Prescription_Privacy] Derivation checks ended
+[Theory Prescription_Privacy] Theory closed
+[Saturating Sources] Step 1 (Max 5)
+[Saturating Sources] Done
+theory Prescription_Privacy begin
+
+// Function signature and definition of the equational theory E
+
+functions: authblob/1, fst/1, h/1, opened/2, pair/2, snd/1, zkpres/2
+equations: fst(<x.1, x.2>) = x.1, snd(<x.1, x.2>) = x.2
+
+
+
+
+
+
+
+rule (modulo E) EnrollHP:
+   [ Fr( ~hp ) ] --> [ !HP( ~hp ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) RegisterPatient:
+   [ Fr( ~pid ) ] --> [ !Patient( ~pid ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) AuthorizeIssuerKey:
+   [ !HP( hp ), Fr( ~epk ) ]
+  --[ HPAuth( hp, ~epk ) ]->
+   [ !AuthMap( ~epk, hp ), Out( authblob(~epk) ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) IssuePrescription:
+   [ !Patient( pid ), !AuthMap( epk, hp ), Fr( ~credid ) ]
+  --[ PresIssued( hp, pid, epk, ~credid ) ]->
+   [ !Cred( pid, epk, ~credid ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) PresentPrescription:
+   [ !Cred( pid, epk, cred ), Fr( ~nonce ), Fr( ~rand ) ]
+  --[ Present( pid, cred, ~nonce ) ]->
+   [ Out( <epk, zkpres(~nonce, ~rand), ~nonce> ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) TriggerAudit:
+   [ !AuthMap( epk, hp ) ]
+  --[ Warrant( epk ) ]->
+   [ !AuditEnabled( epk, hp ) ]
+
+  /* has exactly the trivial AC variant */
+
+rule (modulo E) OpenAuthorized:
+   [ !AuditEnabled( epk, hp ) ]
+  --[ TraceHP( epk, hp ) ]->
+   [ Out( opened(epk, hp) ) ]
+
+  /* has exactly the trivial AC variant */
+
+lemma executable_auth:
+  exists-trace "∃ hp epk #i. HPAuth( hp, epk ) @ #i"
+/*
+guarded formula characterizing all satisfying traces:
+"∃ hp epk #i. (HPAuth( hp, epk ) @ #i)"
+*/
+simplify
+solve( !HP( hp ) ▶₀ #i )
+  case EnrollHP
+  SOLVED // trace found
+qed
+
+lemma executable_presentation:
+  exists-trace "∃ pid cred n #i. Present( pid, cred, n ) @ #i"
+/*
+guarded formula characterizing all satisfying traces:
+"∃ pid cred n #i. (Present( pid, cred, n ) @ #i)"
+*/
+simplify
+solve( !Cred( pid, epk, cred ) ▶₀ #i )
+  case IssuePrescription
+  SOLVED // trace found
+qed
+
+lemma conditional_traceability:
+  all-traces
+  "∀ epk hp #i.
+    (TraceHP( epk, hp ) @ #i) ⇒ (∃ #j. (Warrant( epk ) @ #j) ∧ (#j < #i))"
+/*
+guarded formula characterizing all counter-examples:
+"∃ epk hp #i.
+  (TraceHP( epk, hp ) @ #i) ∧ ∀ #j. (Warrant( epk ) @ #j) ⇒ ¬(#j < #i)"
+*/
+simplify
+solve( !AuditEnabled( epk, hp ) ▶₀ #i )
+  case TriggerAudit
+  by contradiction /* from formulas */
+qed
+
+lemma no_open_without_warrant:
+  all-traces
+  "∀ epk hp #i. (TraceHP( epk, hp ) @ #i) ⇒ (∃ #j. Warrant( epk ) @ #j)"
+/*
+guarded formula characterizing all counter-examples:
+"∃ epk hp #i.
+  (TraceHP( epk, hp ) @ #i) ∧ ∀ #j. (Warrant( epk ) @ #j) ⇒ ⊥"
+*/
+simplify
+solve( !AuditEnabled( epk, hp ) ▶₀ #i )
+  case TriggerAudit
+  by contradiction /* from formulas */
+qed
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* All wellformedness checks were successful. */
+
+/*
+Generated from:
+Tamarin version 1.11.0
+Maude version 2.7 (unsupported)
+Git revision: 32705dd3717361574fc8dada786d4930a3b7ad29 (with uncommited changes), branch: develop
+Compiled at: 2025-10-25 23:26:01.972467575 UTC
+*/
+
+end
+
+==============================================================================
+summary of summaries:
+
+analyzed: /home/nmuslim162022/prescription_privacy.spthy
+
+  processing time: 0.67s
+  
+  executable_auth (exists-trace): verified (3 steps)
+  executable_presentation (exists-trace): verified (3 steps)
+  conditional_traceability (all-traces): verified (3 steps)
+  no_open_without_warrant (all-traces): verified (3 steps)
+

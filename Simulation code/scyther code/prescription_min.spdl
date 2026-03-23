@@ -1,0 +1,59 @@
+protocol PrescriptionPresentation(Patient, Pharmacy)
+{
+    inversekeys(pk, sk);
+
+    function Hidden;
+    function CLSign;
+    function BBSSign;
+    function FiatShamir;
+
+    role Patient
+    {
+        fresh hiddenwit: Ticket;
+        fresh disclosedwit: Ticket;
+        var chall: Nonce;
+
+        fresh hpephemeralsk: Ticket;
+
+        macro pkhpephem = pk(hpephemeralsk);
+        macro authpres = BBSSign(pkhpephem);
+        macro credpres = CLSign(hpephemeralsk, pk(Patient), disclosedwit, Hidden(hiddenwit));
+
+        send_1(Patient, Pharmacy, Patient, Pharmacy, authpres, credpres, pk(Patient), disclosedwit);
+
+        recv_2(Pharmacy, Patient, Pharmacy, Patient, chall);
+
+        macro chash = FiatShamir(authpres, credpres, pk(Patient), pk(Pharmacy), chall);
+
+        send_3(Patient, Pharmacy,
+            {Patient, Pharmacy, chash, disclosedwit, Hidden(hiddenwit)}sk(Patient));
+
+        claim(Patient, Secret, hiddenwit);
+        claim(Patient, Secret, sk(Patient));
+        claim(Patient, Alive);
+    }
+
+    role Pharmacy
+    {
+        var hiddenwit: Ticket;
+        var disclosedwit: Ticket;
+        fresh chall: Nonce;
+
+        var recvauthpres: Ticket;
+        var recvcredpres: Ticket;
+        var recvpkpt: Ticket;
+
+        recv_1(Patient, Pharmacy, Patient, Pharmacy, recvauthpres, recvcredpres, recvpkpt, disclosedwit);
+
+        send_2(Pharmacy, Patient, Pharmacy, Patient, chall);
+
+        macro chashverify = FiatShamir(recvauthpres, recvcredpres, recvpkpt, pk(Pharmacy), chall);
+
+        recv_3(Patient, Pharmacy,
+            {Patient, Pharmacy, chashverify, disclosedwit, Hidden(hiddenwit)}sk(Patient));
+
+        claim(Pharmacy, Nisynch);
+        claim(Pharmacy, Commit, Patient, chall, chashverify);
+        claim(Pharmacy, Running, Patient, chall, chashverify);
+    }
+}

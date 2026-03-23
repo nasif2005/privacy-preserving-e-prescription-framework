@@ -1,0 +1,6 @@
+cd /home/nmuslim162022/scyther/src
+./scyther-linux /home/nmuslim162022/Desktop/paper4/prescription_min.spdl
+
+
+- cd /home/nmuslim162022
+- tamarin-prover model.spthy
