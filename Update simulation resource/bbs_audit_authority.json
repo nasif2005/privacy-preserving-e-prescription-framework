@@ -1,0 +1,13 @@
+{
+  "xi_1": "2991187a3c5a4c59815f39d8728a0bdeb06d3c705f0f49b8bfc9dc35f7525a7d",
+  "xi_2": "6da68448ba80be64f4a139c5417fdf3a8460941b5eaeec427365036ab34ddd6e",
+  "gamma": "16e014744cfae958e9acab84335a56e588d30dd6350e1db5672ebe8e40509b75",
+  "members": [
+    {
+      "hp_id": "HP-00001",
+      "license_no": "LIC-CA-2026-00001",
+      "organization": "Hospital-A",
+      "member_certificate_a": "880bab225b460137d765a45142b015409971ab9f7b1dd2dbdec3877ad331ae795d8aef6411c36f224f298ef11113921a"
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "credential": {
+    "expiry_commitment": "c49da007f0a93580c412dcc2c34b8273217f9153a47c52ec7caf054491bccdea",
+    "bbs_plus_signature": "a650c42fcd5788d1d45179cb2edbe2c4b1f598ade432232b6e0f8f3341dd6395a8c7921e5971d54c5eee20f136ff0ee7115708f57bfc0d38ddb51b31d61f07602dcaceace06808592826e85aec1fd3b64f6e9a9789c3b5707278ee8cc9142ea6aa20c144a401923ad4b156ce1cc235b6",
+    "attributes": {
+      "dosage": "10-mg",
+      "expiry_commitment_hash": "7d8a1a765e6dc0f2e0856068151e28ec3faa3abf1c44abfb2888d2f9e6938f03",
+      "holder": "holder-public-key-001",
+      "medication": "MED-001",
+      "patient_reference": "PATIENT-REF-001",
+      "rx_id": "RX-2026-000001"
+    }
+  },
+  "authorization_certificate": {
+    "ephemeral_issuer_public_key_bbs_plus": "9916bbbc34079c99cc1489958508674252892bc85ba7e25b7bf76ddce8b758222534cf7bb61271efd56044edd62804ef1573b0a77655a2e9ada09bd6dc8a6a05ba392e0aa77ddf1780d8f11c684525f4ea8e3fee66efcaeae0b233f443d67f50",
+    "issue_time": 1783909149,
+    "sigma_grp": {
+      "t1_g1": "a75c7a317d062a48e152907fd512747b34c92ae049aa83a11ec8d093ac5f2d62f52ca64bb60936c63d4bcace552fe709",
+      "t2_g1": "8ec40884e2d85b4d6ae749de5438e89ff82d807b198d3b41e90db97b0abdc8350f9a23a5404fd864c72e64bd9aad3c4e",
+      "t3_g1": "af8df61a9ed6612563df707903318221dee37c1fdbc318d039ff5dfedb5d30d788283b844f9631660ca45ab51952a34b",
+      "challenge": "04423cdbd1e65d3d09d2ba8a234da0177106f74fff9e4b176c3bf11e63adc23d",
+      "s_alpha": "6548f066c63fd0777304b053454df2a719bc3509a488a9dd008cc6bb8427293d",
+      "s_beta": "6b16c03ed7d39e0da7812d33a8983c234c9fca20648749ae5f8560330bc8eb28",
+      "s_x": "06f2ac83a37f8ec53bd80decbf0fcdc4b9b73dea6bc306cc29c793289e24968e",
+      "s_delta_1": "4ad2151b83dfff428d0d5a35571b59766a96e8f95d3e72d84d84dbb79bc093f3",
+      "s_delta_2": "052acf014c68bfba1acec50ebfa616bf91b316c56bf4ebc83cc22bfe523736c8"
+    }
+  },
+  "commitment_opening": {
+    "m_exp": 20818,
+    "r": "dc8e39382bb805b273cc91b4d73ee5801af1f1aa1a6935230f7f97e0927aa105"
+  }
+}

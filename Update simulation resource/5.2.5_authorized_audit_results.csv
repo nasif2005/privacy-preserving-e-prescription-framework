@@ -1,0 +1,2 @@
+timing_runs,operations_per_run,mean_ms,stddev_ms,cv_percent,median_ms,iqr_ms,gomaxprocs
+100,100,0.161577,0.020649,12.780,0.153254,0.026151,1

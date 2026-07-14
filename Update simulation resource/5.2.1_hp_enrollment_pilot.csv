@@ -1,0 +1,4 @@
+operation,n_hp,readings,mean_ns,stddev_ns,cv_percent,mean_per_hp_ns,gpk_bytes,gmk_bytes,member_key_bytes,signature_bytes
+group_setup,0,5,469020.000,455560.723,97.130340,0,384,96,80,336
+member_key_issuance,10,5,1112020.000,691822.573,62.213141,111202.000,384,96,80,336
+member_key_issuance,100,5,8965300.000,1474782.803,16.449899,89653.000,384,96,80,336

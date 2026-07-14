@@ -1,0 +1,38 @@
+{
+  "credential": {
+    "bbs_plus_signature": "8bf57358adbc9896ee39ad05f11c9e7d82ec6666aaa32d02e0fcd077d462d1bef7aea88cd9345e0aa8a355a565eb034c5e5b06adfb412486ca820d7879d5a2afe867b8d0e4d2a1e6337bf40307bb66331a4e7a9f0d862ff86953a236db3f5943a2adb9e8f2278f913583b661f6794e32",
+    "attributes": {
+      "attr_01": "attribute-value-01",
+      "attr_02": "attribute-value-02",
+      "attr_03": "attribute-value-03",
+      "attr_04": "attribute-value-04",
+      "attr_05": "attribute-value-05",
+      "attr_06": "attribute-value-06",
+      "attr_07": "attribute-value-07",
+      "attr_08": "attribute-value-08",
+      "attr_09": "attribute-value-09",
+      "attr_10": "attribute-value-10",
+      "attr_11": "attribute-value-11",
+      "expiry_commitment_hash": "7a55e0fe8b28c4db74727bc5f3c99ba05bca008816a9a1891155efdef7c9611e"
+    }
+  },
+  "authorization_certificate": {
+    "ephemeral_issuer_public_key_bbs_plus": "a34df03f5a1e301e685d1fdfc383be02d0ffdf94b14f770dd3cd356d4e97d80cb0ad086ad1f8c5fa30f7a5b71d00b3291262852c26e1567f421915194356e56b326954bc61a4d2caecba4ca9db428d0d811890242508fee3bad795d6cee45ca3",
+    "issue_time": 1783881379,
+    "sigma_grp": {
+      "t1_g1": "99d1b1724e1bf143753c09645d1083df90f92c952392de8fac0341e257c686738b13c1df4a5ae6a81a46b970a8e68977",
+      "t2_g1": "ae31438449dc2898875f6ffb1a191663520f388eab00ac9a93764582b32fb580aac9774c4d28fd26fc32ee2e478905fc",
+      "t3_g1": "8d4591e3b4d9e222b08d27902937e019bdbac6d9c6d5c93b603c195c1dd705649d7af911cda0825eb5bfe16e390f021a",
+      "challenge": "0fe04985bfd3a0fd857de59fca029cb21d58d77848bd9e9f75676eb651d2485b",
+      "s_alpha": "54426c9c4fbf4dc2b54f1c04ce2a4bead8551179f20908b671722ed2efb57d95",
+      "s_beta": "09981dd92bf8530cd3d80042c8c650e512fe7dfa01248db6ce4606c32aaa629a",
+      "s_x": "565292b87ccc92f743c5e36a0e71d090c070cf57b7b9e3b5d406aa7477a18663",
+      "s_delta_1": "019806b2d809bf87027717707e5d3353b7a1eeea3a11f744ce8864cbf331ec2d",
+      "s_delta_2": "561ebaef91eaa154c49bff452320bd5bbc788c83146bdd339fd97ae4d5cdb70b"
+    }
+  },
+  "commitment_opening": {
+    "m_exp": 20818,
+    "r": "f8fa29011e383fb5ea1e3dd1e2e1c721bd56ba43870d7cb407b95371f55fb700"
+  }
+}
